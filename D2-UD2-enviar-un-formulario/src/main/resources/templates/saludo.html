@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Primeros pasos: enviar un formulario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Formulario</h1>
+    <form action="#" th:action="@{/saludo}" th:object="${saludo}" method="post">
+        <p>Id: <input type="text" th:field="*{id}" /></p>
+        <p>Mensaje: <input type="text" th:field="*{contenido}" /></p>
+        <p><input type="submit" value="Enviar" /> <input type="reset" value="Borrar" /></p>
+    </form>
+</body>
+</html>

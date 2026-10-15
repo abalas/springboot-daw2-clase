@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Primeros pasos: enviar un formulario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Resultado</h1>
+    <p th:text="'id: ' + ${saludo.id}" />
+    <p th:text="'contenido: ' + ${saludo.contenido}" />
+    <a href="/saludo">Enviar otro mensaje</a>
+</body>
+</html>

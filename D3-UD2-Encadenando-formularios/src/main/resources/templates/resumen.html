@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Resumen del viaje</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="tarjeta">
+  <p class="progreso">Resumen</p>
+  <h1>Tu viaje</h1>
+
+  <!-- Una línea por etapa: si mañana hay 5 etapas, esta plantilla no cambia -->
+  <ol>
+    <li th:each="linea : ${resumen}" th:text="${linea}"></li>
+  </ol>
+
+  <!--/* Formulario solo para el botón Atrás: lleva TODOS los datos ocultos */-->
+  <form th:action="@{/resumen}" th:object="${viaje}" method="post">
+    <th:block th:replace="~{fragmentos :: ocultosPaso1}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso2}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso3}"></th:block>
+
+    <div class="botones">
+      <a th:href="@{/paso1}" class="boton">Empezar de nuevo</a>
+      <button type="submit" name="atras" class="secundario">← Atrás</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

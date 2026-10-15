@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Paso 3 · Preferencias</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="tarjeta">
+  <p class="progreso">Paso 3 de 3</p>
+  <h1>Preferencias</h1>
+
+  <form th:action="@{/paso3}" th:object="${viaje}" method="post" novalidate>
+
+    <!-- Checkbox de selección múltiple -->
+    <p class="etiqueta">Actividades (elige entre 1 y 4)</p>
+    <div class="opciones">
+      <label th:each="act : ${listaActividades}">
+        <input type="checkbox" th:field="*{actividades}" th:value="${act}">
+        <span th:text="${act}"></span>
+      </label>
+    </div>
+    <p class="error" th:if="${#fields.hasErrors('actividades')}" th:errors="*{actividades}"></p>
+
+    <label for="comentarios">Comentarios (opcional)</label>
+    <textarea th:field="*{comentarios}" rows="3"></textarea>
+    <p class="error" th:if="${#fields.hasErrors('comentarios')}" th:errors="*{comentarios}"></p>
+
+    <th:block th:replace="~{fragmentos :: ocultosPaso1}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso2}"></th:block>
+
+    <div class="botones">
+      <button type="submit" name="siguiente">Ver resumen →</button>
+      <button type="submit" name="atras" class="secundario">← Atrás</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

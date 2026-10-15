@@ -1,0 +1,22 @@
+# Configuración del workspace de Eclipse
+.metadata/
+RemoteSystemsTempFiles/
+
+# Compilación (Maven y Gradle)
+target/
+build/
+bin/
+.gradle/
+out/
+
+# Configuración del IDE en cada proyecto
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.springBeans
+.sts4-cache/
+.idea/
+*.iml
+.vscode/

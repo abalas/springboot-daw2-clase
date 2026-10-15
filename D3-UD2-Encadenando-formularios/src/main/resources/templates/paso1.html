@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Paso 1 · Datos del viajero</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="tarjeta">
+  <p class="progreso">Paso 1 de 3</p>
+  <h1>Datos del viajero</h1>
+
+  <form th:action="@{/paso1}" th:object="${viaje}" method="post" novalidate>
+
+    <label for="nombre">Nombre</label>
+    <input type="text" th:field="*{nombre}">
+    <p class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}">
+    <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+    <label for="edad">Edad</label>
+    <input type="text" th:field="*{edad}">
+    <p class="error" th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></p>
+
+    <!--/* Datos de los pasos 2 y 3, por si hemos llegado aquí con "Atrás" */-->
+    <th:block th:replace="~{fragmentos :: ocultosPaso2}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso3}"></th:block>
+
+    <div class="botones">
+      <button type="submit" name="siguiente">Siguiente →</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

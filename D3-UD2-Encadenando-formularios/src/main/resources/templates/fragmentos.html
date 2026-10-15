@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/* Campos ocultos de cada paso. Se insertan DENTRO de un <form th:object="${viaje}"> */-->
+
+<th:block th:fragment="ocultosPaso1">
+  <input type="hidden" th:field="*{nombre}">
+  <input type="hidden" th:field="*{email}">
+  <input type="hidden" th:field="*{edad}">
+</th:block>
+
+<th:block th:fragment="ocultosPaso2">
+  <input type="hidden" th:field="*{destino}">
+  <input type="hidden" th:field="*{alojamiento}">
+  <input type="hidden" th:field="*{noches}">
+  <input type="hidden" th:field="*{personas}">
+</th:block>
+
+<th:block th:fragment="ocultosPaso3">
+  <!--/* Una lista necesita UN input oculto por elemento, todos con el mismo name */-->
+  <input type="hidden" name="actividades" th:each="act : *{actividades}" th:value="${act}">
+  <input type="hidden" th:field="*{comentarios}">
+</th:block>
+
+</body>
+</html>

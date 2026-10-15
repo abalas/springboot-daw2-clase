@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Paso 2 · Destino</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="tarjeta">
+  <p class="progreso">Paso 2 de 3</p>
+  <h1>Destino</h1>
+
+  <form th:action="@{/paso2}" th:object="${viaje}" method="post" novalidate>
+
+    <!-- Desplegable (select) -->
+    <label for="destino">Destino</label>
+    <select th:field="*{destino}">
+      <option value="">-- Elige un destino --</option>
+      <option th:each="d : ${destinos}" th:value="${d}" th:text="${d}"></option>
+    </select>
+    <p class="error" th:if="${#fields.hasErrors('destino')}" th:errors="*{destino}"></p>
+
+    <!-- Radio -->
+    <p class="etiqueta">Alojamiento</p>
+    <div class="opciones">
+      <label th:each="a : ${alojamientos}">
+        <input type="radio" th:field="*{alojamiento}" th:value="${a}">
+        <span th:text="${a}"></span>
+      </label>
+    </div>
+    <p class="error" th:if="${#fields.hasErrors('alojamiento')}" th:errors="*{alojamiento}"></p>
+
+    <label for="noches">Número de noches</label>
+    <input type="text" th:field="*{noches}">
+    <p class="error" th:if="${#fields.hasErrors('noches')}" th:errors="*{noches}"></p>
+
+    <label for="personas">Número de personas</label>
+    <input type="text" th:field="*{personas}">
+    <p class="error" th:if="${#fields.hasErrors('personas')}" th:errors="*{personas}"></p>
+
+    <!--/* Lo que no se ve en esta pantalla viaja oculto */-->
+    <th:block th:replace="~{fragmentos :: ocultosPaso1}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso3}"></th:block>
+
+    <!--/* "Siguiente" va PRIMERO en el HTML para que la tecla Enter avance; el CSS lo coloca a la derecha */-->
+    <div class="botones">
+      <button type="submit" name="siguiente">Siguiente →</button>
+      <button type="submit" name="atras" class="secundario">← Atrás</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

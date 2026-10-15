@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <form action="#" th:action="@{/}" th:object="${formularioPersona}" method="post">
+            <table>
+                <tr>
+                    <td>Nombre:</td>
+                    <td><input type="text" th:field="*{nombre}" /></td>
+                    <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error en el nombre</td>
+                </tr>
+                <tr>
+                    <td>Edad:</td>
+                    <td><input type="text" th:field="*{edad}" /></td>
+                    <td th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">Error en la edad</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Enviar</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
