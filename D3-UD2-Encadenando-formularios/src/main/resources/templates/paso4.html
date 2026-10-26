@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Paso 4 · Transporte</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="tarjeta">
+  <p class="progreso">Paso 4 de 4</p>
+  <h1>Transporte</h1>
+
+  <form th:action="@{/paso4}" th:object="${viaje}" method="post" novalidate>
+
+    <p class="etiqueta">Medio de transporte</p>
+    <div class="opciones">
+      <label th:each="t : ${transportes}">
+        <input type="radio" th:field="*{transporte}" th:value="${t}">
+        <span th:text="${t}"></span>
+      </label>
+    </div>
+    <p class="error" th:if="${#fields.hasErrors('transporte')}" th:errors="*{transporte}"></p>
+
+    <th:block th:replace="~{fragmentos :: ocultosPaso1}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso2}"></th:block>
+    <th:block th:replace="~{fragmentos :: ocultosPaso3}"></th:block>
+
+    <div class="botones">
+      <button type="submit" name="siguiente">Ver resumen →</button>
+      <button type="submit" name="atras" class="secundario">← Atrás</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

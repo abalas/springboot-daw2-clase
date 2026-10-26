@@ -7,7 +7,7 @@
 </head>
 <body>
 <main class="tarjeta">
-  <p class="progreso">Paso 3 de 3</p>
+  <p class="progreso">Paso 3 de 4</p>
   <h1>Preferencias</h1>
 
   <form th:action="@{/paso3}" th:object="${viaje}" method="post" novalidate>
@@ -28,9 +28,11 @@
 
     <th:block th:replace="~{fragmentos :: ocultosPaso1}"></th:block>
     <th:block th:replace="~{fragmentos :: ocultosPaso2}"></th:block>
+	<th:block th:replace="~{fragmentos :: ocultosPaso4}"></th:block>
 
     <div class="botones">
-      <button type="submit" name="siguiente">Ver resumen →</button>
+      <button type="submit" name="siguiente">Siguiente
+	  </button>
       <button type="submit" name="atras" class="secundario">← Atrás</button>
     </div>
   </form>

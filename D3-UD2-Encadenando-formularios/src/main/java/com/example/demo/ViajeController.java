@@ -53,7 +53,7 @@ public class ViajeController {
     }
 
     // Sin sesión no hay nada guardado: si alguien escribe /paso2 en la barra, empieza de cero
-    @GetMapping({ "/paso2", "/paso3", "/resumen" })
+    @GetMapping({ "/paso2", "/paso3","/paso4", "/resumen" })
     public String sinDatos() {
         return "redirect:/paso1";
     }
@@ -108,6 +108,31 @@ public class ViajeController {
         if (hayErrores(result, "actividades", "comentarios")) {
             return "paso3";
         }
+/*        model.addAttribute("resumen", construirResumen(viaje));
+        return "resumen";
+    }*/
+        return "paso4";
+    }
+    
+    //===================== Paso 4 =========================
+    private static final List<String> TRANSPORTES = List.of("Avión", "Tren", "Autobús", "Coche");
+
+    @ModelAttribute("transportes")
+    public List<String> transportes() {
+        return TRANSPORTES;
+    }
+    
+    @PostMapping(value = "/paso4", params = "atras")
+    public String atrasPaso4(@ModelAttribute("viaje") Viaje viaje, BindingResult result) {
+        return "paso3";
+    }
+
+    @PostMapping(value = "/paso4", params = "siguiente")
+    public String paso4(@Validated(Viaje.Paso4.class) @ModelAttribute("viaje") Viaje viaje,
+                        BindingResult result, Model model) {
+        if (result.hasFieldErrors("transporte")) {
+            return "paso4";
+        }
         model.addAttribute("resumen", construirResumen(viaje));
         return "resumen";
     }
@@ -116,7 +141,7 @@ public class ViajeController {
 
     @PostMapping(value = "/resumen", params = "atras")
     public String volverAPaso3(@ModelAttribute("viaje") Viaje viaje, BindingResult result) {
-        return "paso3";
+        return "paso4";
     }
 
     // ===================== Métodos auxiliares =====================
@@ -142,6 +167,7 @@ public class ViajeController {
             preferencias += ". Comentarios: " + v.getComentarios();
         }
         lineas.add(preferencias);
+        lineas.add("Transporte: " + v.getTransporte());
         return lineas;
     }
 }

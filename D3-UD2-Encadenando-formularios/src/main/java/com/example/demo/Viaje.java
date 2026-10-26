@@ -18,6 +18,8 @@ public class Viaje {
     public interface Paso1 {}
     public interface Paso2 {}
     public interface Paso3 {}
+    public interface Paso4 {}
+
 
     // ---------- Paso 1: datos del viajero ----------
     @NotBlank(message = "El nombre es obligatorio", groups = Paso1.class)
@@ -58,6 +60,15 @@ public class Viaje {
 
     @Size(max = 200, message = "Los comentarios no pueden pasar de 200 caracteres", groups = Paso3.class)
     private String comentarios;
+    
+    // ---------- Paso 4: transporte ---------
+
+
+    @NotBlank(message = "Elige un transporte", groups = Paso4.class)
+    private String transporte;
+
+    public String getTransporte() { return transporte; }
+    public void setTransporte(String transporte) { this.transporte = transporte; }
 
     // ---------- Getters y setters ----------
     public String getNombre() { return nombre; }
