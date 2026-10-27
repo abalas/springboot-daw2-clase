@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{app.titulo}">Saludo</title>
+</head>
+<body>
+<h1 th:text="#{app.titulo}">Saludo</h1>
+
+<p th:if="${#strings.isEmpty(name)}" th:text="#{saludo.anonimo}">¡Hola!</p>
+<p th:unless="${#strings.isEmpty(name)}" th:text="#{saludo.nombre(${name})}">¡Hola, nombre!</p>
+
+<p th:text="#{saludo.instrucciones}">Instrucciones</p>
+<p th:text="#{idioma.actual(${#locale.getDisplayLanguage(#locale)})}">Idioma</p>
+
+<p>
+  <span th:text="#{idioma.cambiar}">Cambiar idioma:</span>
+  <a th:href="@{/greeting(lang='es', name=${name})}">Español</a> |
+  <a th:href="@{/greeting(lang='en', name=${name})}">English</a> |
+  <a th:href="@{/greeting(lang='fr', name=${name})}">Français</a>
+</p>
+</body>
+</html>

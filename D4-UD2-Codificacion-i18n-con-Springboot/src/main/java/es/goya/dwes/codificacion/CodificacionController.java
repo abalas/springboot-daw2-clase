@@ -13,18 +13,16 @@ import org.springframework.web.util.HtmlUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@RestController // = @Controller + @ResponseBody: el String devuelto es el cuerpo de la respuesta
+@RestController
 public class CodificacionController {
 
     private static final String HTML = "text/html;charset=UTF-8";
 
-    // Recibe el texto por GET o POST: desde los formularios, un enlace o la URL escrita a mano
     @RequestMapping(value = "/recibir", method = { RequestMethod.GET, RequestMethod.POST }, produces = HTML)
-    public String recibir(@RequestParam(defaultValue = "") String texto, HttpServletRequest request) {
+    public String recibir(@RequestParam(name = "texto", defaultValue = "") String texto, HttpServletRequest request) {
 
         String codificado = URLEncoder.encode(texto, StandardCharsets.UTF_8);
 
-        // Cada carácter con su código Unicode: sirve para detectar letras "rotas" (Ã±, �...)
         String codigos = texto.codePoints()
                 .mapToObj(cp -> String.format("%s=U+%04X", HtmlUtils.htmlEscape(Character.toString(cp)), cp))
                 .collect(Collectors.joining("  "));
@@ -66,9 +64,8 @@ public class CodificacionController {
                 texto);
     }
 
-    // Solo muestra lo recibido (destino de los enlaces)
     @GetMapping(value = "/mostrar", produces = HTML)
-    public String mostrar(@RequestParam(defaultValue = "") String texto) {
+    public String mostrar(@RequestParam(name = "texto", defaultValue = "") String texto) {
         return """
             <!DOCTYPE html>
             <html lang="es"><head><meta charset="UTF-8"><title>Mostrar</title></head><body>
